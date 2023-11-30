@@ -20,11 +20,24 @@ void InvertedIndex::UpdateDocumentBase(std::vector<std::string> input_docs){
 //        thread.join();
 //    }
     }
+//    for (const auto& word : freq_dictionary) {
+//        cout << word.first << endl;
+//        for (auto entry : word.second) {
+//            cout << entry.doc_id << " " << entry.count << endl;
+//        }
+//    }
 }
 
 std::vector<Entry> InvertedIndex::GetWordCount(const std::string& word){
     //ищем word в freq_dictionary
     auto item = freq_dictionary.find(word);
+    if (item == freq_dictionary.end()) {
+        return {};
+    }
+//    cout << item->first << endl;
+//    for (auto entry : item->second) {
+//        cout << entry.doc_id << " " << entry.count << endl;
+//    }
     return item->second;
 }
 
@@ -54,5 +67,8 @@ void InvertedIndex::updateDocument(int doc_id){
             freq_dictionary.insert(std::pair<std::string, std::vector<Entry>>(pair.first, {pair.second}));
         }
     }
+//    for (const auto& pair : file_freq_dictionary) {
+//        cout << pair.first << " " << pair.second.doc_id << " " << pair.second.count << endl;
+//    }
 //    dictionary_access.unlock();
 }

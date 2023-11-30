@@ -6,6 +6,8 @@
   },
   "files": [
     "../resources/ex1.txt",
-    "../resources/ex2.txt"
+    "../resources/ex2.txt",
+    "../resources/ex3.txt",
+    "../resources/ex4.txt"
   ]
 }

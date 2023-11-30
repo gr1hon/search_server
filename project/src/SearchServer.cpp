@@ -6,6 +6,7 @@
 std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<std::string>& queries_input){
     std::vector<std::vector<RelativeIndex>> ans;
     auto converter_JSON = new ConverterJSON();
+    auto docs = converter_JSON->GetTextDocuments();
     for(const auto& str : queries_input){
         //разбиваем запрос на слова, считаем их количество
         std::map<std::string, int> words_stat;
@@ -19,16 +20,23 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
                 words_stat.insert(std::pair<std::string, int>(w, 1));
             }
         }
+//        for (auto c: words_stat) {
+//            cout << c.first << " " << c.second << endl;
+//        }
         //сортируем по увеличению частоты встречаемости
         std::multimap<int, std::string> sorted_words = flip_map(words_stat);
 
         // считаем абсолютную релевантность каждого документа как сумму релевантности всех слов
         std::vector<int> frequencies;
         int max = 0;
-        for (int i = 0; i < queries_input.size(); ++i) {
+        for (int i = 0; i < docs.size(); ++i) {
             int frequencies_sum = 0;
             for(auto & words_stat_it : words_stat){
                 std::vector<Entry> entry = _index.GetWordCount(words_stat_it.first);
+//                cout << words_stat_it.first << endl;
+//                for (auto e : entry) {
+//                    cout << e.doc_id << " " << e.count << endl;
+//                }
                 for (auto e : entry) {
                     if (e.doc_id == i){
                         frequencies_sum += (int) e.count;
@@ -45,14 +53,15 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
             ans.push_back(relative_index);
             continue;
         }
-
+//        cout << frequencies.size() << endl;
         //считаем относительную релевантность
         std::vector<float> relative_frequencies;
         for (auto x : frequencies) {
+//            cout << (float) x / (float) max << endl;
             relative_frequencies.push_back((float) x / (float) max);
         }
         std::vector<RelativeIndex> relative_index;
-        for (int i = 0; i < queries_input.size(); ++i) {
+        for (int i = 0; i < docs.size(); ++i) {
             RelativeIndex r{(size_t) i ,relative_frequencies[i]};
             if (r.rank > 0){
                 relative_index.push_back(r);
