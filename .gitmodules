@@ -1,3 +1,0 @@
-[submodule "project/json"]
-	path = project/json
-	url = https://github.com/nlohmann/json.git
