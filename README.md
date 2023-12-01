@@ -19,9 +19,13 @@
 содержимое текстовых файлов:
 
 ex1.txt: milk milk milk milk water water water
+
 ex2.txt: milk water water
+
 ex3.txt: milk milk milk milk milk water water water water water
+
 ex4.txt: americano cappuccino
+
 
 содержимое requests.json
 
