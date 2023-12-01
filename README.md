@@ -1,6 +1,7 @@
 Пример работы проекта
 
 содержимое config.json
+
 {
   "config": {
     "name": "MySearchEngine",
@@ -14,12 +15,16 @@
     "../resources/ex4.txt"
   ]
 }
+
 содержимое текстовых файлов:
+
 ex1.txt: milk milk milk milk water water water
 ex2.txt: milk water water
 ex3.txt: milk milk milk milk milk water water water water water
 ex4.txt: americano cappuccino
+
 содержимое requests.json
+
 {
   "requests": [
     "milk water",
@@ -28,6 +33,7 @@ ex4.txt: americano cappuccino
 }
 
 Тогда, запуская проект, ответ помещается в файл answers.json. В данном примере ответ получится таким:
+
 {
   "answers":{
     "request1":{
