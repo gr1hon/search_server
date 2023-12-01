@@ -4,7 +4,7 @@
 
 {
   "config": {
-    "name": "MySearchEngine",
+		"name": "MySearchEngine",
     "version": "1.1",
     "max_responses": 5
   },
