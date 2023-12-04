@@ -1,31 +1,22 @@
-//
-// Created by grigo on 23.11.2023.
-//
 #include "../include/InvertedIndex.h"
 
 void InvertedIndex::UpdateDocumentBase(std::vector<std::string> input_docs){
     docs = std::move(input_docs);
     freq_dictionary.clear();
     int doc_id = 0;
-//    std::vector<std::thread> threads;
+    mutex dictionary_access;
+    std::vector<std::thread> threads;
     for (auto& file_name : docs) {
-        InvertedIndex::updateDocument(doc_id);
+        threads.emplace_back([&dictionary_access, doc_id, this]{
+            dictionary_access.lock();
+            InvertedIndex::updateDocument(doc_id);
+            dictionary_access.unlock();
+        });
         doc_id++;
-        //для каждого нового файла создаем отдельный поток
-//        std::thread th(&InvertedIndex::updateDocument, std::ref(doc_id));
-//        threads.emplace_back(th);
-//        doc_id++;
-//    }
-//    for (auto& thread : threads) {
-//        thread.join();
-//    }
     }
-//    for (const auto& word : freq_dictionary) {
-//        cout << word.first << endl;
-//        for (auto entry : word.second) {
-//            cout << entry.doc_id << " " << entry.count << endl;
-//        }
-//    }
+    for (auto& thread : threads) {
+        thread.join();
+    }
 }
 
 std::vector<Entry> InvertedIndex::GetWordCount(const std::string& word){
@@ -34,10 +25,6 @@ std::vector<Entry> InvertedIndex::GetWordCount(const std::string& word){
     if (item == freq_dictionary.end()) {
         return {};
     }
-//    cout << item->first << endl;
-//    for (auto entry : item->second) {
-//        cout << entry.doc_id << " " << entry.count << endl;
-//    }
     return item->second;
 }
 
@@ -58,7 +45,6 @@ void InvertedIndex::updateDocument(int doc_id){
             file_freq_dictionary.insert(std::pair<std::string, Entry>(w, entry));
         }
     }
-//    dictionary_access.lock();
     for (const auto& pair : file_freq_dictionary) {
         auto item = freq_dictionary.find(pair.first);
         if (item != freq_dictionary.end()){
@@ -67,8 +53,4 @@ void InvertedIndex::updateDocument(int doc_id){
             freq_dictionary.insert(std::pair<std::string, std::vector<Entry>>(pair.first, {pair.second}));
         }
     }
-//    for (const auto& pair : file_freq_dictionary) {
-//        cout << pair.first << " " << pair.second.doc_id << " " << pair.second.count << endl;
-//    }
-//    dictionary_access.unlock();
 }
