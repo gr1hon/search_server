@@ -7,8 +7,8 @@
 
 Пример работы проекта
 
-содержимое config.json
-
+- Содержимое config.json
+```
 {
   "config": {
 		"name": "MySearchEngine",
@@ -22,29 +22,36 @@
     "../resources/ex4.txt"
   ]
 }
+```
+- Содержимое текстовых файлов:
+  1. ex1.txt:
+ ```
+ milk milk milk milk water water water
+```
+  2. ex2.txt:
+```
+ milk water water
+```
+  3. ex3.txt:
+```
+ milk milk milk milk milk water water water water water
+```
+  4. ex4.txt:
+```
+ americano cappuccino
+```
 
-содержимое текстовых файлов:
-
-ex1.txt: milk milk milk milk water water water
-
-ex2.txt: milk water water
-
-ex3.txt: milk milk milk milk milk water water water water water
-
-ex4.txt: americano cappuccino
-
-
-содержимое requests.json
-
+- Содержимое requests.json
+```
 {
   "requests": [
     "milk water",
     "sugar"
   ]
 }
-
+```
 Тогда, запуская проект, ответ помещается в файл answers.json. В данном примере ответ получится таким:
-
+```
 {
   "answers":{
     "request1":{
@@ -60,3 +67,4 @@ ex4.txt: americano cappuccino
     }
   }
 }
+```
