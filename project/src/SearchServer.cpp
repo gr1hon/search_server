@@ -1,6 +1,3 @@
-//
-// Created by grigo on 23.11.2023.
-//
 #include "../include/SearchServer.h"
 
 std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<std::string>& queries_input){
@@ -20,12 +17,8 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
                 words_stat.insert(std::pair<std::string, int>(w, 1));
             }
         }
-//        for (auto c: words_stat) {
-//            cout << c.first << " " << c.second << endl;
-//        }
         //сортируем по увеличению частоты встречаемости
         std::multimap<int, std::string> sorted_words = flip_map(words_stat);
-
         // считаем абсолютную релевантность каждого документа как сумму релевантности всех слов
         std::vector<int> frequencies;
         int max = 0;
@@ -33,10 +26,6 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
             int frequencies_sum = 0;
             for(auto & words_stat_it : words_stat){
                 std::vector<Entry> entry = _index.GetWordCount(words_stat_it.first);
-//                cout << words_stat_it.first << endl;
-//                for (auto e : entry) {
-//                    cout << e.doc_id << " " << e.count << endl;
-//                }
                 for (auto e : entry) {
                     if (e.doc_id == i){
                         frequencies_sum += (int) e.count;
@@ -53,11 +42,9 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
             ans.push_back(relative_index);
             continue;
         }
-//        cout << frequencies.size() << endl;
         //считаем относительную релевантность
         std::vector<float> relative_frequencies;
         for (auto x : frequencies) {
-//            cout << (float) x / (float) max << endl;
             relative_frequencies.push_back((float) x / (float) max);
         }
         std::vector<RelativeIndex> relative_index;
@@ -67,7 +54,6 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
                 relative_index.push_back(r);
             }
         }
-
         //сортируем выходные данные по убыванию относительной релевантности
         for (int i = 0; i < relative_index.size(); ++i) {
             for (int j = i; j < relative_index.size(); ++j) {
@@ -79,7 +65,6 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
                 }
             }
         }
-
         //оставляем только первые несколько ответов в соответствии с полем max_responses
         int limit = converter_JSON->GetResponsesLimit();
         if (relative_index.size() > limit){
