@@ -1,6 +1,3 @@
-//
-// Created by grigo on 23.11.2023.
-//
 #include "../include/ConverterJSON.h"
 
 std::vector<std::string> ConverterJSON::GetTextDocuments(){
