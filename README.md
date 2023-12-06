@@ -4,8 +4,19 @@
 
 Проект использует стандартные библиотеки языка C++, библиотеку nlohmann_json для работы с JSON файлами, библиотеку Google Test для проведения автоматических модульных тестов.
 
-Необходимые инструменты для запуска:
+## Инструкция по запуску
+Для запуска проекта нужно установить cmake (https://cmake.org/download/)
 
+Клонируйте этот репозиторий командой  
+```git clone --recurse-submodules https://github.com/gr1hon/search_server.git```
+```
+cd путь-к-проекту
+mkdir build
+cd build
+cmake ../
+make
+./{main}
+```
 ## Пример работы проекта
 
 - Содержимое config.json
