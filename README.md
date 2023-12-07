@@ -13,7 +13,8 @@
 cd путь-к-проекту
 mkdir build
 cd build
-cmake -G "MinGW Makefiles" ../ //после -G нужно указать нужный компилятор
+cmake -G "MinGW Makefiles" ../
+//после -G нужно указать нужный компилятор, список можно найти с помощью cmake --help
 make
 ./search_project
 ```
