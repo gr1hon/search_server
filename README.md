@@ -13,10 +13,11 @@
 cd путь-к-проекту
 mkdir build
 cd build
-cmake ../
+cmake -G "MinGW Makefiles" ../ //после -G нужно указать нужный компилятор
 make
-./{main}
+./search_project
 ```
+После этого в файле answers.json появится результат
 ## Пример работы проекта
 
 - Содержимое config.json
