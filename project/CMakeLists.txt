@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.24)
-project(test2)
+project(search_server)
 
 set(CMAKE_CXX_STANDARD 17)
 set(JSON_BuildTests OFF CACHE INTERNAL "")
 add_subdirectory(nlohmann_json tests)
-add_executable(test2 src/main.cpp include/ConverterJSON.h include/InvertedIndex.h include/SearchServer.h src/ConverterJSON.cpp src/InvertedIndex.cpp src/SearchServer.cpp
+add_executable(search_server src/main.cpp include/ConverterJSON.h include/InvertedIndex.h include/SearchServer.h src/ConverterJSON.cpp src/InvertedIndex.cpp src/SearchServer.cpp
         tests/index_tests.cpp tests/server_tests.cpp)
-target_link_libraries(test2 PRIVATE nlohmann_json::nlohmann_json)
+target_link_libraries(search_server PRIVATE nlohmann_json::nlohmann_json)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -23,7 +23,7 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-target_link_libraries(test2 PRIVATE gtest_main)
+target_link_libraries(search_server PRIVATE gtest_main)
 
 include(GoogleTest)
-#gtest_discover_tests(test2)
+#gtest_discover_tests(search_server)
