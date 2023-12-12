@@ -12,6 +12,8 @@
 
 Клонируйте этот репозиторий командой  
 ```git clone --recurse-submodules https://github.com/gr1hon/search_server.git```
+
+В файле config/config.json в поле files нужно указать список файлов, по которым будет производиться поиск, а также максимальное количество ответов на один запрос в поле max_responses 
 ```
 cd 'путь-к-проекту'
 mkdir build
