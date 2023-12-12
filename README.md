@@ -13,7 +13,7 @@
 Клонируйте этот репозиторий командой  
 ```git clone --recurse-submodules https://github.com/gr1hon/search_server.git```
 ```
-cd путь-к-проекту
+cd 'путь-к-проекту'
 mkdir build
 cd build
 cmake -G "MinGW Makefiles" ../
