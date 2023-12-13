@@ -79,8 +79,8 @@ make
 {
   "answers":{
     "request1":{
-      "relevance":[{
-        "doc_id":2,"rank":1.0},
+      "relevance":[
+        {"doc_id":2,"rank":1.0},
         {"doc_id":0,"rank":0.7},
         {"doc_id":1,"rank":0.3}
       ],
